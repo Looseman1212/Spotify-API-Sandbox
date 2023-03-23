@@ -56,6 +56,18 @@ body {
   background-color: #FFBA08;
 }
 
+.search-toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+#authorised {
+  display: none;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 #search-bar {
   display: none;
 }
@@ -64,10 +76,12 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-#authorised {
-  display: none;
-  text-align: center;
-  color: rgba(255, 255, 255, 0.4);
+.messages {
+  text-align: end;
+}
+
+.messages-heading {
+  margin-top: 0px;
 }
 
 .results-container {

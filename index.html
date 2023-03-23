@@ -24,22 +24,25 @@
         <input class="btn" type="button" onclick="requestAuthorization()" value="Request Authorization">
       </div>
     </div>
-    <div class="messages">
-      <div id="authorised">
-        <p>Spotify authentication successful</p>
+    <div class="search-toolbar-container">
+      <form id="search-bar">
+        <div class="col">
+          <div class="mb-0point8">
+            <label for="search" class="form-label label-mb-0point5">Search</label>
+            <input type="text" class="form-input" id="search" placeholder="Search for an artist on spotify!">
+          </div>
+          <input class="btn" type="button" onclick="searchSpotify()" value="Search">
+        </div>
+      </form>
+      <div class="messages">
+        <p class="messages-heading">Messages:</p>
+        <div id="authorised">
+          <p>Spotify authentication successful</p>
+        </div>
       </div>
     </div>
-    <form id="search-bar">
-      <div class="col">
-        <div class="mb-0point8">
-          <label for="search" class="form-label label-mb-0point5">Search</label>
-          <input type="text" class="form-input" id="search" placeholder="Search for an artist on spotify!">
-        </div>
-        <input class="btn" type="button" onclick="searchSpotify()" value="Search">
-      </div>
-    </form>
     <div class="results-container">
-        <h3>Search Results</h3>
+        <h3>Search Result</h3>
         <ul style="padding-inline-start: 0px;">
           <li id="first-result" class="search-result">
             <div id="search-result-image">
