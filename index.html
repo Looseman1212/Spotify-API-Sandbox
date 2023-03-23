@@ -24,33 +24,36 @@
         <input class="btn" type="button" onclick="requestAuthorization()" value="Request Authorization">
       </div>
     </div>
-    <div class="messages">
-      <div id="authorised">
-        <p>Spotify authentication successful</p>
+    <div class="search-toolbar-container">
+      <form id="search-bar">
+        <div class="col">
+          <div class="mb-0point8">
+            <label for="search" class="form-label label-mb-0point5">Search</label>
+            <input type="text" class="form-input" id="search" placeholder="Search for an artist on spotify!">
+          </div>
+          <input class="btn" type="button" onclick="searchSpotify()" value="Search">
+        </div>
+      </form>
+      <div class="messages">
+        <p class="messages-heading">Messages:</p>
+        <div id="authorised">
+          <p>Spotify authentication successful</p>
+        </div>
       </div>
     </div>
-    <form id="search-bar">
-      <div class="col">
-        <div class="mb-0point8">
-          <label for="search" class="form-label label-mb-0point5">Search</label>
-          <input type="text" class="form-input" id="search" placeholder="Search for an artist on spotify!">
-        </div>
-        <input class="btn" type="button" onclick="searchSpotify()" value="Search">
-      </div>
-    </form>
-      <div class="search-results">
-        <h3>Search Results</h3>
-        <ul>
-          <li id="first-result">
-            <div class="search-result">
-              <div class="search-result-image">
-                <img id="artist-image" src="https://i.scdn.co/image/ab67616d0000b273f9b5f9b4b3b1f9f9f9f9f9f9" alt="artist-image">
-              </div>
+    <div class="results-container">
+        <h3>Search Result</h3>
+        <ul style="padding-inline-start: 0px;">
+          <li id="first-result" class="search-result">
+            <div id="search-result-image">
+              <!-- <img id="artist-image" src="https://i.scdn.co/image/ab67616d0000b273f9b5f9b4b3b1f9f9f9f9f9f9" alt="artist-image"> -->
+            </div>
+            <div class="result-card-info-half">
               <div class="search-result-info">
                 <h4 id="artist-name">Artist Name: </h4>
                 <p id="artist-genres">Artist Genre: </p>
                 <p id="artist-follower-count">Amount of Followers: </p>
-                <h5><a id="artist-spotify-link" href="">Click to open on spotify here!</a></h5>
+                <h5><a id="artist-spotify-link" href="" target="_blank">Click to open on spotify here!</a></h5>
               </div>
             </div>
           </li>

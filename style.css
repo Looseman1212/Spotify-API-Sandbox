@@ -56,12 +56,10 @@ body {
   background-color: #FFBA08;
 }
 
-#search-bar {
-  display: none;
-}
-
-#search::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+.search-toolbar-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 #authorised {
@@ -70,9 +68,62 @@ body {
   color: rgba(255, 255, 255, 0.4);
 }
 
-.search-results {
+#search-bar {
+  display: none;
+}
+
+#search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.messages {
+  text-align: end;
+}
+
+.messages-heading {
+  margin-top: 0px;
+}
+
+.results-container {
   display: none;
   text-align: center;
-  width: 40dvw;
+  width: 970px;
   margin: 0 auto;
+}
+
+.search-result {
+  list-style-type: none;
+  height: 260px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #4a504e;
+  /* border-top: 1px solid #1bd760;
+  border-bottom: 1px solid #1bd760; */
+  border: 1px solid #1bd760;
+  border-radius: 130px 10px 10px 130px;
+}
+
+#search-result-image {
+  width: 260px;
+  height: 260px;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.result-card-info-half {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-result-info {
+  height: 80%;
+}
+
+.search-result-info h4 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
 }

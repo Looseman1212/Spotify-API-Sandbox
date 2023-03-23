@@ -122,7 +122,7 @@ function handleSpotifySearchResponse() {
     let spotify_link = data.artists.items[0].external_urls.spotify
     let followers = data.artists.items[0].followers.total
     let image_url = data.artists.items[0].images[0].url
-    // console.log(`Name: ${name}, Genres: ${genres}, Spotify Link: ${spotify_link}, Followers: ${followers}, Image: ${image_url}`)
+    console.log(`Name: ${name}, Genres: ${genres}, Spotify Link: ${spotify_link}, Followers: ${followers}, Image: ${image_url}`)
     revealResults(name, genres, spotify_link, followers, image_url);
   } else {
     console.log(this.responseText);
@@ -130,7 +130,7 @@ function handleSpotifySearchResponse() {
 }
 
 function clearSearchResults() {
-  document.getElementById('artist-name').innerHTML = 'Artist Name: ';
+  document.getElementById('artist-name').innerHTML = '';
   document.getElementById('artist-genres').innerHTML = 'Genres: ';
   document.getElementById('artist-follower-count').innerHTML = 'Followers: ';
   document.getElementById('artist-spotify-link').innerHTML = 'Click to open on spotify here!';
@@ -138,14 +138,14 @@ function clearSearchResults() {
 
 function revealResults(n, g, s_link, f, i_url) {
   clearSearchResults();
-  document.querySelector('.search-results').style.display = 'block';
-  document.getElementById('artist-image').src = i_url;
+  document.querySelector('.results-container').style.display = 'block';
+  document.getElementById('search-result-image').style.cssText += `background-image:url(${i_url})`;
   document.getElementById('artist-name').insertAdjacentHTML('beforeend', n);
-  document.getElementById('artist-follower-count').insertAdjacentText('beforeend', f);
+  document.getElementById('artist-follower-count').insertAdjacentText('beforeend', f.toLocaleString());
   document.getElementById('artist-spotify-link').href = s_link;
-  g.forEach(function (genre) {
-    document.getElementById('artist-genres').insertAdjacentText('beforeend', `${genre}, `);
-  });
+  for (let i = 0; i < 3; i++) {
+    document.getElementById('artist-genres').insertAdjacentText('beforeend', `${g[i]}, `);
+  }
 }
 
 
