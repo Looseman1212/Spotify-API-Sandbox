@@ -7,8 +7,8 @@ const AUTHORIZE = 'https://accounts.spotify.com/authorize'
 const TOKEN = 'https://accounts.spotify.com/api/token'
 
 function onPageLoad() {
-  accessToken = localStorage.getItem('accessToken');
-  refreshToken = localStorage.getItem('refreshToken');
+  // accessToken = localStorage.getItem('accessToken');
+  // refreshToken = localStorage.getItem('refreshToken');
 
   if (window.location.search.length > 0){
     clientId = localStorage.getItem('clientId');
@@ -16,7 +16,9 @@ function onPageLoad() {
     handleRedirect();
   };
 
-  if (accessToken != null && refreshToken != null) {
+  if (localStorage.getItem('accessToken') != null && localStorage.getItem('refreshToken') != null) {
+    accessToken = localStorage.getItem('accessToken');
+    refreshToken = localStorage.getItem('refreshToken');
     hideAuthShowSearch();
   };
 }
