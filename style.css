@@ -93,7 +93,7 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  background-color: #4a504e;
+  background-color: rgba(74, 80, 78, 0.5);
   /* border-top: 1px solid #1bd760;
   border-bottom: 1px solid #1bd760; */
   border: 1px solid #1bd760;
