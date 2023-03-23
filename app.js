@@ -95,15 +95,38 @@ function handleAccessRefreshTokenResponse() { // .onload instance method gives o
 
 function hideAuthShowSearch() { // hides the authorization form and shows the search bar when auth token is found
   document.getElementById('auth-form').style.display = 'none';
-  document.getElementById('search-bar').style.display = 'block';
+  document.querySelector('.search-toolbar-container').style.display = 'flex';
   document.getElementById('authorised').style.display = 'block';
 }
+
+function checkAccessTokenValid(url) { // checks if the access token is valid
+  let request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.setRequestHeader(`Authorization`, `Bearer ${accessToken}`);
+  request.send();
+  request.onload = function() {
+    if (this.status == 200) {
+      console.log('current access token is valid');
+      return true;
+    } else if (this.status == 401) {
+      console.log('current access token is invalid');
+      return false;
+    }
+  }
+}
+
 
 function searchSpotify() {
   let search = document.getElementById('search').value;
   let url = 'https://api.spotify.com/v1/search?q=' + search + '&type=' + 'artist';
-  console.log(url);
-  fetchSpotifyData(url);
+  // if else statement to check if the access token is expired
+  if (checkAccessTokenValid(url)) {
+    fetchSpotifyData(url);
+  } else {
+    console.log('updating access token');
+    handleAuthTokenExipry();
+    fetchSpotifyData(url);
+  }
 }
 
 function fetchSpotifyData(url) {
@@ -114,7 +137,7 @@ function fetchSpotifyData(url) {
   request.onload = handleSpotifySearchResponse;
 }
 
-function handleSpotifySearchResponse() {
+function handleSpotifySearchResponse() { // maybe could pass this the original url so that it can be used in the refresh token function
   if (this.status == 200) {
     let data = JSON.parse(this.responseText);
     let name = data.artists.items[0].name
@@ -122,12 +145,20 @@ function handleSpotifySearchResponse() {
     let spotify_link = data.artists.items[0].external_urls.spotify
     let followers = data.artists.items[0].followers.total
     let image_url = data.artists.items[0].images[0].url
-    console.log(`Name: ${name}, Genres: ${genres}, Spotify Link: ${spotify_link}, Followers: ${followers}, Image: ${image_url}`)
+    // console.log(`Name: ${name}, Genres: ${genres}, Spotify Link: ${spotify_link}, Followers: ${followers}, Image: ${image_url}`)
     revealResults(name, genres, spotify_link, followers, image_url);
-  } else {
-    console.log(this.responseText);
+  } else if (this.status == 401) {
+    console.log(this.message);
+    handleAuthTokenExipry();
   }
 }
+
+function handleAuthTokenExipry() {
+  let body = 'grant_type=refresh_token';
+  body += '&refresh_token=' + refreshToken;
+  requestAccessRefreshTokens(body);
+}
+
 
 function clearSearchResults() {
   document.getElementById('artist-name').innerHTML = '';
