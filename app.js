@@ -82,12 +82,16 @@ function handleAccessRefreshTokenResponse() { // .onload instance method gives o
   if (this.status == 200) {
     let data = JSON.parse(this.responseText);
     // console.log(data)
-    let accessToken = data.access_token;
-    let refreshToken = data.refresh_token;
-    localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('refreshToken', refreshToken);
-    console.log("Access token: " + accessToken);
-    console.log("Refresh token: " + refreshToken);
+    if (data.accessToken != undefined) {
+      accessToken = data.accessToken;
+      localStorage.setItem('accessToken', accessToken);
+      console.log("Access token: " + accessToken);
+    }
+    if (data.refreshToken != undefined) {
+      refreshToken = data.refreshToken;
+      localStorage.setItem('refreshToken', refreshToken);
+      console.log("Refresh token: " + refreshToken);
+    }
     onPageLoad();
   } else {
     // try to log error if it is not a 200 response
@@ -116,7 +120,6 @@ function checkAccessTokenValid(url) { // checks if the access token is valid
     }
   }
 }
-
 
 function searchSpotify() {
   let search = document.getElementById('search').value;
@@ -156,8 +159,10 @@ function handleSpotifySearchResponse() { // maybe could pass this the original u
 }
 
 function handleAuthTokenExipry() {
+  refreshToken = localStorage.getItem('refreshToken');
   let body = 'grant_type=refresh_token';
   body += '&refresh_token=' + refreshToken;
+  body += '&client_id=' + clientId;
   requestAccessRefreshTokens(body);
 }
 
